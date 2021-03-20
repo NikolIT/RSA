@@ -28,6 +28,14 @@ namespace RSA_ConsoleApp
 
             List<int> msg = GetArrayIntWithString(Massege);
 
+            Console.Write($"massege - ");
+
+            foreach (var item in msg)
+            {
+                Console.Write($" {item}");
+            }
+            Console.WriteLine();
+
             List<char> result = new List<char>();
 
             Console.Write("p - ");
@@ -87,12 +95,16 @@ namespace RSA_ConsoleApp
 
             info += $"                  decriptRSA\r\n";
 
+            Console.Write($"decriptRSA - ");
+
             for (int i = 0; i < msg.Count; i++)
             {
+
                 info += $"{msg[i]} - ";
                 msg[i] = decriptRSA(secretKey, msg[i]);
                 info += $"{msg[i]}\r\n";
                 info += $"message { ABC[msg[i]]}\r\n";
+                Console.Write($" {msg[i]}");
                 msg[i] = ABC[msg[i]];
             }
 
@@ -101,11 +113,6 @@ namespace RSA_ConsoleApp
                 result.Add((char)item);
             }
 
-            Console.Write($"decriptRSA - ");
-            foreach (var item in msg)
-            {
-                Console.Write(" " + item);
-            }
             Console.WriteLine();
 
             Console.Write($"massege - ");
