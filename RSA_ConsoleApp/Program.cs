@@ -8,12 +8,12 @@ namespace RSA_ConsoleApp
     struct Key
     {
         public int e_d;
-        public int key;
+        public int n;
     }
 
     class Program
     {
-        static List<char> ABC = new List<char>() { '_', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Є', 'Ж', 'З', 'И', 'І', 'Ї', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ю', 'Я' };
+        static List<char> ABC = new List<char>() { '_', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Є', 'Ж', 'З', 'И', 'I', 'Ї', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ю', 'Я' };
 
         static string info = String.Empty;
 
@@ -41,45 +41,46 @@ namespace RSA_ConsoleApp
             Console.Write("p - ");
             int p = int.Parse(Console.ReadLine());
 
-            info += $"p - {p}\r\n";
+            info += $"p - {p}\r\n\r\n";
 
             Console.Write("q - ");
             int q = int.Parse(Console.ReadLine());
 
-            info += $"q - {q}\r\n";
+            info += $"q - {q}\r\n\r\n";
 
             int n = p * q;
-            info += $"n - {n}\r\n";
-
+            info += $"n - {n}\r\n\r\n";
+            Console.WriteLine($"n - {n}");
             int f_n = (p - 1) * (q - 1);
 
 
-            info += $"f(n) - {f_n}\r\n";
+            info += $"f(n) - {f_n}\r\n\r\n";
 
             int e = Get_e(f_n);
 
-            info += $"e - {e}\r\n";
+            info += $"e - {e}\r\n\r\n";
 
             int d = Gcdext(e, f_n);
 
             info += $"d - {d}\r\n";
 
-            Key openKey = new Key() { e_d = e, key = n};
+            Key openKey = new Key() { e_d = e, n = n};
 
-            info += $"openKey e - {openKey.e_d} d - {openKey.key}\r\n";
+            info += $"openKey e - {openKey.e_d} n - {openKey.n}\r\n\r\n";
 
-            Key secretKey = new Key() { e_d = d, key = n };
+            Key secretKey = new Key() { e_d = d, n = n };
 
-            info += $"secretKey e - {secretKey.e_d} n - {secretKey.key}\r\n";
+            info += $"secretKey d - {secretKey.e_d} n - {secretKey.n}\r\n\r\n";
 
-            Console.WriteLine($"Secret key e - {secretKey.e_d} d - {secretKey.key} ");
-            Console.WriteLine($"Open key e - {openKey.e_d} n - {openKey.key}");
+            Console.WriteLine($"Open key e - {openKey.e_d} n - {openKey.n}");
+            Console.WriteLine($"Secret key d - {secretKey.e_d} n - {secretKey.n}");
+            
 
-            info += $"                  encriptRSA\r\n";
+            info += $"                  encriptRSA\r\n\r\n";
 
             for (int i = 0; i < msg.Count; i++)
             {
-                info += $"{msg[i]} - ";
+                info += $"{msg[i]} -> ";
                 msg[i] = encriptRSA(openKey, msg[i]);
                 info += $"{msg[i]}\r\n";
             }
@@ -93,14 +94,14 @@ namespace RSA_ConsoleApp
             }
             Console.WriteLine();
 
-            info += $"                  decriptRSA\r\n";
+            info += $"                  decriptRSA\r\n\r\n";
 
             Console.Write($"decriptRSA - ");
 
             for (int i = 0; i < msg.Count; i++)
             {
 
-                info += $"{msg[i]} - ";
+                info += $"{msg[i]} -> ";
                 msg[i] = decriptRSA(secretKey, msg[i]);
                 info += $"{msg[i]}\r\n";
                 info += $"message { ABC[msg[i]]}\r\n";
@@ -130,6 +131,18 @@ namespace RSA_ConsoleApp
                 dirInfo.Create();
             }
 
+            // цифровий підпис
+            Console.Write($"signature - ");
+            int[] signature = msg.ToArray();
+            info += $"signature -";
+            for (int i = 0; i < signature.Length; i++)
+            {
+                signature[i] = encriptRSA(secretKey, signature[i]);
+                Console.Write($" {signature[i]}");
+                info += $" {signature[i]}";
+            }
+            Console.WriteLine();
+
             // сохраняем текст в файл
             using (FileStream fstream = new FileStream($@"{path}\RSA_InfoWorck.txt", FileMode.OpenOrCreate))
             {
@@ -139,6 +152,11 @@ namespace RSA_ConsoleApp
                 fstream.Write(array, 0, array.Length);
                 Console.WriteLine($"Файл з інформацією було створено за наступним шляхом - {path}");
             }
+
+
+
+
+
 
             Console.ReadLine();
         }
@@ -166,7 +184,7 @@ namespace RSA_ConsoleApp
             bi = new BigInteger(msg);
             bi = BigInteger.Pow(bi, (int)secretKey.e_d);
 
-            BigInteger n_ = new BigInteger((int)secretKey.key);
+            BigInteger n_ = new BigInteger((int)secretKey.n);
 
             bi = bi % n_;
 
@@ -177,7 +195,17 @@ namespace RSA_ConsoleApp
 
         private static int encriptRSA(Key openKey, long msg)
         {
-            return (int)Math.Pow(msg, openKey.e_d) % openKey.key;
+            BigInteger bi;
+            bi = new BigInteger(msg);
+            bi = BigInteger.Pow(bi, (int)openKey.e_d);
+
+            BigInteger n_ = new BigInteger((int)openKey.n);
+
+            bi = bi % n_;
+
+            int index = Convert.ToInt32(bi.ToString());
+
+            return index;
         }
 
         static int Get_e(int f_n)
