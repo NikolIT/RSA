@@ -243,7 +243,7 @@ namespace RSA_ConsoleApp
 
         static private int Gcdext(int d, int m)
         {
-            int e = 10;
+            int e = 1;
 
             while (true)
             {
