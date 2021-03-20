@@ -27,6 +27,7 @@ namespace RSA_ConsoleApp
             info += $"Massege - {Massege} \r\n";
 
             List<int> msg = GetArrayIntWithString(Massege);
+            int[] signature = msg.ToArray();
 
             Console.Write($"massege - ");
 
@@ -133,11 +134,22 @@ namespace RSA_ConsoleApp
 
             // цифровий підпис
             Console.Write($"signature - ");
-            int[] signature = msg.ToArray();
+            
             info += $"signature -";
             for (int i = 0; i < signature.Length; i++)
             {
                 signature[i] = encriptRSA(secretKey, signature[i]);
+                Console.Write($" {signature[i]}");
+                info += $" {signature[i]}";
+            }
+            Console.WriteLine();
+
+            // перевірка цифрового підпису
+            Console.Write($"signature check - ");
+            info += $"\r\nsignature check -";
+            for (int i = 0; i < signature.Length; i++)
+            {
+                signature[i] = encriptRSA(openKey, signature[i]);
                 Console.Write($" {signature[i]}");
                 info += $" {signature[i]}";
             }
