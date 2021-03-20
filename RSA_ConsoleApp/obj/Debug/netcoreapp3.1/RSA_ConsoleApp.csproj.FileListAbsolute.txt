@@ -1,0 +1,13 @@
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\bin\Debug\netcoreapp3.1\RSA_ConsoleApp.exe
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\bin\Debug\netcoreapp3.1\RSA_ConsoleApp.deps.json
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\bin\Debug\netcoreapp3.1\RSA_ConsoleApp.runtimeconfig.json
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\bin\Debug\netcoreapp3.1\RSA_ConsoleApp.runtimeconfig.dev.json
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\bin\Debug\netcoreapp3.1\RSA_ConsoleApp.dll
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\bin\Debug\netcoreapp3.1\RSA_ConsoleApp.pdb
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\obj\Debug\netcoreapp3.1\RSA_ConsoleApp.csprojAssemblyReference.cache
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\obj\Debug\netcoreapp3.1\RSA_ConsoleApp.AssemblyInfoInputs.cache
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\obj\Debug\netcoreapp3.1\RSA_ConsoleApp.AssemblyInfo.cs
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\obj\Debug\netcoreapp3.1\RSA_ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\obj\Debug\netcoreapp3.1\RSA_ConsoleApp.dll
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\obj\Debug\netcoreapp3.1\RSA_ConsoleApp.pdb
+C:\Users\nikol\source\repos\RSA_ConsoleApp\RSA_ConsoleApp\obj\Debug\netcoreapp3.1\RSA_ConsoleApp.genruntimeconfig.cache
